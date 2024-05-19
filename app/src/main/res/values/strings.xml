@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">VECTOR CALCULATOR</string>
+
+    <string name="vector1">VECTOR 1</string>
+    <string name="vector2">VECTOR 2</string>
+
+    <string name="button_1">SUMA</string>
+    <string name="button_2">RESTA</string>
+    <string name="button_3">P. ESC</string>
+    <string name="button_4">P. VEC</string>
+    <string name="button_clr">LIMPIAR</string>
+
+
+    <string name="xcomp">X</string>
+    <string name="ycomp">Y</string>
+    <string name="zcomp">Z</string>
+
+    <string name="xcompHint">Enter X</string>
+    <string name="ycompHint">Enter Y</string>
+    <string name="zcompHint">Enter Z</string>
+
+</resources>
