@@ -246,10 +246,6 @@ public class MainActivity extends AppCompatActivity {
             xcomp2.getText().toString().isEmpty() ||
             ycomp2.getText().toString().isEmpty() ||
             zcomp2.getText().toString().isEmpty()) {
-            
-            //show snackbar
-            Snackbar snackbar = Snackbar.make(this.getCurrentFocus(), "Please enter valid information", 2);
-            snackbar.show();
 
             return false;
         }
