@@ -12,7 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
-    Button btnSum, btnRes, btnEsc, btnVec, btnClr;
+    Button btnSum, btnRes, btnEsc, btnVec, btnAng, btnClr;
     EditText xcomp1, ycomp1, zcomp1, xcomp2, ycomp2, zcomp2;
     double x1, y1, z1, x2, y2, z2;
     @Override
@@ -29,11 +29,13 @@ public class MainActivity extends AppCompatActivity {
         btnRes = findViewById(R.id.btn2);
         btnEsc = findViewById(R.id.btn3);
         btnVec = findViewById(R.id.btn4);
+        btnAng = findViewById(R.id.btn5);
         btnClr = findViewById(R.id.btnclr);
         btnSum.setOnClickListener(v -> sumButton());
         btnRes.setOnClickListener(v -> resButton());
         btnEsc.setOnClickListener(v -> escButton());
         btnVec.setOnClickListener(v -> vecButton());
+        btnAng.setOnClickListener(v -> angButton());
         btnClr.setOnClickListener(v -> clrButton());
         xcomp1 = findViewById(R.id.xcomp1);
         xcomp1.setImeOptions(EditorInfo.IME_ACTION_NEXT);
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         zcomp2 = findViewById(R.id.zcomp2);
         zcomp2.setImeOptions(EditorInfo.IME_ACTION_DONE);
     }
+
     private void sumButton() {
         btnSum.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
         if(validate()){
@@ -149,6 +152,33 @@ public class MainActivity extends AppCompatActivity {
         }
         return sb.toString();
     }
+    private void angButton() {
+        btnAng.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+        if(validate()){
+            AlertDialog alert = new AlertDialog.Builder(this)
+                    .setTitle("ANGULO ENTRE VECTORES")
+                    .setMessage(angulo())
+                    .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .show();
+        }
+    }
+
+    private String angulo() {
+        initInputs();
+        double magnitud1 = Math.sqrt(x1 * x1 + y1 * y1 + z1 * z1);
+        double magnitud2 = Math.sqrt(x2 * x2 + y2 * y2 + z2 * z2);
+        double productoEscalar = x1 * x2 + y1 * y2 + z1 * z2;
+        double cosAngulo = productoEscalar / (magnitud1 * magnitud2);
+        double anguloRadianes = Math.acos(cosAngulo);
+        double anguloGrados = Math.toDegrees(anguloRadianes);
+        return String.format("%.2f grados", anguloGrados);
+    }
+
     private void initInputs() {
         x1 = Double.parseDouble(xcomp1.getText().toString());
         y1 = Double.parseDouble(ycomp1.getText().toString());
