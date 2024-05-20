@@ -1,21 +1,20 @@
 package com.example.vectcalc;
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.HapticFeedbackConstants;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 public class MainActivity extends AppCompatActivity {
     Button btnSum, btnRes, btnEsc, btnVec, btnClr;
     EditText xcomp1, ycomp1, zcomp1, xcomp2, ycomp2, zcomp2;
-
+    double x1, y1, z1, x2, y2, z2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,19 +25,16 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         btnSum = findViewById(R.id.btn1);
         btnRes = findViewById(R.id.btn2);
         btnEsc = findViewById(R.id.btn3);
         btnVec = findViewById(R.id.btn4);
         btnClr = findViewById(R.id.btnclr);
-
-        btnSum.setOnClickListener(v -> sumVectors());
-        btnRes.setOnClickListener(v -> resVectors());
-        btnEsc.setOnClickListener(v -> escVectors());
-        btnVec.setOnClickListener(v -> vecVectors());
-        btnClr.setOnClickListener(v -> clearbtn());
-
+        btnSum.setOnClickListener(v -> sumButton());
+        btnRes.setOnClickListener(v -> resButton());
+        btnEsc.setOnClickListener(v -> escButton());
+        btnVec.setOnClickListener(v -> vecButton());
+        btnClr.setOnClickListener(v -> clrButton());
         xcomp1 = findViewById(R.id.xcomp1);
         xcomp1.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         ycomp1 = findViewById(R.id.ycomp1);
@@ -51,22 +47,109 @@ public class MainActivity extends AppCompatActivity {
         ycomp2.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         zcomp2 = findViewById(R.id.zcomp2);
         zcomp2.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
     }
-
-    private void sumVectors() {
+    private void sumButton() {
         btnSum.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+        AlertDialog alert = new AlertDialog.Builder(this)
+                .setTitle("SUMA")
+                .setMessage("< " + sumavectores() + " >")
+                .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .show();
     }
-    private void resVectors() {
+    private String sumavectores() {
+        initInputs();
+        double[] res = new double[3];
+        res[0] = x1 + x2;
+        res[1] = y1 + y2;
+        res[2] = z1 + z2;
+        StringBuilder sb = new StringBuilder();
+        for (double appended : res){
+            sb.append(appended).append(" , ");
+        }
+        return sb.toString();
+    }
+    private void resButton() {
         btnRes.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+        AlertDialog alert = new AlertDialog.Builder(this)
+                .setTitle("RESTA")
+                .setMessage("< " + restavectores() + " >")
+                .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .show();
     }
-    private void escVectors() {
+    private String restavectores() {
+        initInputs();
+        double[] res = new double[3];
+        res[0] = x1 - x2;
+        res[1] = y1 - y2;
+        res[2] = z1 - z2;
+        StringBuilder sb = new StringBuilder();
+        for (double appended : res){
+            sb.append(appended).append(" , ");
+        }
+        return sb.toString();
+    }
+    private void escButton() {
         btnEsc.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+        AlertDialog alert = new AlertDialog.Builder(this)
+                .setTitle("PRODUCTO ESCALAR")
+                .setMessage(productoescalar())
+                .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .show();
     }
-    private void vecVectors() {
+    private String productoescalar() {
+        initInputs();
+        double res = x1 * x2 + y1 * y2 + z1 * z2;
+        return String.valueOf(res);
+    }
+    private void vecButton() {
         btnVec.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+        AlertDialog alert = new AlertDialog.Builder(this)
+                .setTitle("PRODUCTO VECTORIAL")
+                .setMessage("< " + productovectorial() + " >")
+                .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .show();
     }
-    private void clearbtn() {
+    private String productovectorial(){
+        initInputs();
+        double[] res = new double[3];
+        res[0] = y1 * z2 - z1 * y2;
+        res[1] = z1 * x2 - x1 * z2;
+        res[2] = x1 * y2 - y1 * x2;
+        StringBuilder sb = new StringBuilder();
+        for (double appended : res) {
+            sb.append(appended).append(" , ");
+        }
+        return sb.toString();
+    }
+    private void initInputs() {
+        x1 = Double.parseDouble(xcomp1.getText().toString());
+        y1 = Double.parseDouble(ycomp1.getText().toString());
+        z1 = Double.parseDouble(zcomp1.getText().toString());
+        x2 = Double.parseDouble(xcomp2.getText().toString());
+        y2 = Double.parseDouble(ycomp2.getText().toString());
+        z2 = Double.parseDouble(zcomp2.getText().toString());
+    }
+    private void clrButton() {
         btnSum.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
         xcomp1.setText("");
         ycomp1.setText("");
