@@ -61,8 +61,6 @@
                         style="@style/hints_style"
                         android:id="@+id/xcomp1"
                         android:hint="@string/xcompHint"
-                        android:inputType="number"
-                        android:digits="1234567890,"
                         android:layout_marginBottom="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -84,8 +82,6 @@
                         style="@style/hints_style"
                         android:id="@+id/ycomp1"
                         android:hint="@string/ycompHint"
-                        android:inputType="number"
-                        android:digits="1234567890,"
                         android:layout_marginBottom="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -107,8 +103,6 @@
                         style="@style/hints_style"
                         android:id="@+id/zcomp1"
                         android:hint="@string/zcompHint"
-                        android:inputType="number"
-                        android:digits="1234567890,"
                         android:layout_marginBottom="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -141,8 +135,6 @@
                         style="@style/hints_style"
                         android:id="@+id/xcomp2"
                         android:hint="@string/xcompHint"
-                        android:inputType="number"
-                        android:digits="1234567890,"
                         android:layout_marginBottom="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -164,8 +156,6 @@
                         style="@style/hints_style"
                         android:id="@+id/ycomp2"
                         android:hint="@string/ycompHint"
-                        android:inputType="number"
-                        android:digits="1234567890,"
                         android:layout_marginBottom="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -187,8 +177,6 @@
                         style="@style/hints_style"
                         android:id="@+id/zcomp2"
                         android:hint="@string/zcompHint"
-                        android:inputType="number"
-                        android:digits="1234567890,"
                         android:layout_marginBottom="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>

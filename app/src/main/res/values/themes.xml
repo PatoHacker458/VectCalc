@@ -56,5 +56,7 @@
         <item name="android:fontFamily">@font/googlesans</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAlignment">center</item>
+        <item name="android:inputType">number</item>
+        <item name="android:digits">1234567890,.</item>
     </style>
 </resources>

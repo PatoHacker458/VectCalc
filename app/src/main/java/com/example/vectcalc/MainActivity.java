@@ -50,16 +50,18 @@ public class MainActivity extends AppCompatActivity {
     }
     private void sumButton() {
         btnSum.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-        AlertDialog alert = new AlertDialog.Builder(this)
-                .setTitle("SUMA")
-                .setMessage("< " + sumavectores() + " >")
-                .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                })
-                .show();
+        if(validate()){
+            AlertDialog alert = new AlertDialog.Builder(this)
+                    .setTitle("SUMA")
+                    .setMessage("< " + sumavectores() + " >")
+                    .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .show();
+        }
     }
     private String sumavectores() {
         initInputs();
@@ -75,16 +77,18 @@ public class MainActivity extends AppCompatActivity {
     }
     private void resButton() {
         btnRes.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-        AlertDialog alert = new AlertDialog.Builder(this)
-                .setTitle("RESTA")
-                .setMessage("< " + restavectores() + " >")
-                .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                })
-                .show();
+        if(validate()){
+            AlertDialog alert = new AlertDialog.Builder(this)
+                    .setTitle("RESTA")
+                    .setMessage("< " + restavectores() + " >")
+                    .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .show();
+        }
     }
     private String restavectores() {
         initInputs();
@@ -100,16 +104,18 @@ public class MainActivity extends AppCompatActivity {
     }
     private void escButton() {
         btnEsc.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-        AlertDialog alert = new AlertDialog.Builder(this)
-                .setTitle("PRODUCTO ESCALAR")
-                .setMessage(productoescalar())
-                .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                })
-                .show();
+        if(validate()){
+            AlertDialog alert = new AlertDialog.Builder(this)
+                    .setTitle("PRODUCTO ESCALAR")
+                    .setMessage(productoescalar())
+                    .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .show();
+        }
     }
     private String productoescalar() {
         initInputs();
@@ -118,16 +124,18 @@ public class MainActivity extends AppCompatActivity {
     }
     private void vecButton() {
         btnVec.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-        AlertDialog alert = new AlertDialog.Builder(this)
-                .setTitle("PRODUCTO VECTORIAL")
-                .setMessage("< " + productovectorial() + " >")
-                .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                })
-                .show();
+        if(validate()){
+            AlertDialog alert = new AlertDialog.Builder(this)
+                    .setTitle("PRODUCTO VECTORIAL")
+                    .setMessage("< " + productovectorial() + " >")
+                    .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .show();
+        }
     }
     private String productovectorial(){
         initInputs();
@@ -157,5 +165,21 @@ public class MainActivity extends AppCompatActivity {
         xcomp2.setText("");
         ycomp2.setText("");
         zcomp2.setText("");
+    }
+    private boolean validate(){
+        if (xcomp1.getText().toString().isEmpty() ||
+            ycomp1.getText().toString().isEmpty() ||
+            zcomp1.getText().toString().isEmpty() ||
+            xcomp2.getText().toString().isEmpty() ||
+            ycomp2.getText().toString().isEmpty() ||
+            zcomp2.getText().toString().isEmpty()) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Error")
+                    .setMessage("Por favor, complete todos los campos.")
+                    .setPositiveButton("OK", null)
+                    .show();
+            return false;
+        }
+        return true;
     }
 }
