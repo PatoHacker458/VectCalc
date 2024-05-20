@@ -1,7 +1,9 @@
 package com.example.vectcalc;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.HapticFeedbackConstants;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sumButton() {
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         btnSum.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
         if(validate()){
             AlertDialog alert = new AlertDialog.Builder(this)
@@ -64,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                     })
                     .show();
+        }
+        else {
+            long[] pattern = {0,0,20,0,0,20};
+            vibrator.vibrate(pattern,-1);
         }
     }
     private String sumavectores() {
@@ -79,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         return sb.toString();
     }
     private void resButton() {
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         btnRes.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
         if(validate()){
             AlertDialog alert = new AlertDialog.Builder(this)
@@ -91,6 +99,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                     })
                     .show();
+        }
+        else {
+            long[] pattern = {0,0,20,0,0,20};
+            vibrator.vibrate(pattern,-1);
         }
     }
     private String restavectores() {
@@ -106,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
         return sb.toString();
     }
     private void escButton() {
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         btnEsc.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
         if(validate()){
             AlertDialog alert = new AlertDialog.Builder(this)
@@ -119,6 +132,10 @@ public class MainActivity extends AppCompatActivity {
                     })
                     .show();
         }
+        else {
+            long[] pattern = {0,0,20,0,0,20};
+            vibrator.vibrate(pattern,-1);
+        }
     }
     private String productoescalar() {
         initInputs();
@@ -126,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
         return String.valueOf(res);
     }
     private void vecButton() {
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         btnVec.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
         if(validate()){
             AlertDialog alert = new AlertDialog.Builder(this)
@@ -138,6 +156,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                     })
                     .show();
+        }
+        else {
+            long[] pattern = {0,0,20,0,0,20};
+            vibrator.vibrate(pattern,-1);
         }
     }
     private String productovectorial(){
@@ -153,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
         return sb.toString();
     }
     private void angButton() {
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         btnAng.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
         if(validate()){
             AlertDialog alert = new AlertDialog.Builder(this)
@@ -166,8 +189,11 @@ public class MainActivity extends AppCompatActivity {
                     })
                     .show();
         }
+        else {
+            long[] pattern = {0,0,20,0,0,20};
+            vibrator.vibrate(pattern,-1);
+        }
     }
-
     private String angulo() {
         initInputs();
         double magnitud1 = Math.sqrt(x1 * x1 + y1 * y1 + z1 * z1);
@@ -178,7 +204,6 @@ public class MainActivity extends AppCompatActivity {
         double anguloGrados = Math.toDegrees(anguloRadianes);
         return String.format("%.2f grados", anguloGrados);
     }
-
     private void initInputs() {
         x1 = Double.parseDouble(xcomp1.getText().toString());
         y1 = Double.parseDouble(ycomp1.getText().toString());
@@ -188,7 +213,21 @@ public class MainActivity extends AppCompatActivity {
         z2 = Double.parseDouble(zcomp2.getText().toString());
     }
     private void clrButton() {
-        btnSum.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        if (xcomp1.getText().toString().trim().isEmpty() &&
+                ycomp1.getText().toString().trim().isEmpty() &&
+                zcomp1.getText().toString().trim().isEmpty() &&
+                xcomp2.getText().toString().trim().isEmpty() &&
+                ycomp2.getText().toString().trim().isEmpty() &&
+                zcomp2.getText().toString().trim().isEmpty()) {
+            if (vibrator != null && vibrator.hasVibrator()) {
+                long[] pattern = {0,0,20,0,0,20};
+                vibrator.vibrate(pattern, -1);
+            }
+        } else {
+            btnSum.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+        }
         xcomp1.setText("");
         ycomp1.setText("");
         zcomp1.setText("");
