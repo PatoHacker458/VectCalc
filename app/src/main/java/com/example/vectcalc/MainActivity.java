@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.material.snackbar.Snackbar;
+
 public class MainActivity extends AppCompatActivity {
     Button btnSum, btnRes, btnEsc, btnVec, btnAng, btnClr;
     EditText xcomp1, ycomp1, zcomp1, xcomp2, ycomp2, zcomp2;
@@ -236,17 +239,18 @@ public class MainActivity extends AppCompatActivity {
         zcomp2.setText("");
     }
     private boolean validate(){
+        
         if (xcomp1.getText().toString().isEmpty() ||
             ycomp1.getText().toString().isEmpty() ||
             zcomp1.getText().toString().isEmpty() ||
             xcomp2.getText().toString().isEmpty() ||
             ycomp2.getText().toString().isEmpty() ||
             zcomp2.getText().toString().isEmpty()) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Error")
-                    .setMessage("Por favor, complete todos los campos.")
-                    .setPositiveButton("OK", null)
-                    .show();
+            
+            //show snackbar
+            Snackbar snackbar = Snackbar.make(this.getCurrentFocus(), "Please enter valid information", 2);
+            snackbar.show();
+
             return false;
         }
         return true;
